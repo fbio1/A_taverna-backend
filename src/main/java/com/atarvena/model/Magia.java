@@ -10,21 +10,18 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity(name = "item")
+@Entity(name = "magia")
 @Table
-public class Item extends AbstractModel<Integer> {
-
+public class Magia extends AbstractModel<Integer>{
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
+	
 	@ManyToOne
-	@JoinColumn(name = "enciclopedia_id")
+	@JoinColumn(name = "grimorio_id")
 	@JsonIgnore
-	private Enciclopedia enciclopedia;
-
-	public Item() {
-	}
+	private Grimorio grimorio;
 
 	@Override
 	public Integer getId() {
@@ -34,14 +31,6 @@ public class Item extends AbstractModel<Integer> {
 	@Override
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Enciclopedia getEnciclopedia() {
-		return enciclopedia;
-	}
-
-	public void setEnciclopedia(Enciclopedia enciclopedia) {
-		this.enciclopedia = enciclopedia;
 	}
 
 }

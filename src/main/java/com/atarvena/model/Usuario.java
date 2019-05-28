@@ -5,40 +5,40 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Entity(name = "usuario")
+@Table
 public class Usuario extends AbstractModel<Integer> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@NotBlank(message = "O campo username não pode ser nulo.")
+	@Column(unique = true)
+	private String username;
+
+	@NotBlank(message = "O campo senha não pode ser nulo.")
+	@Column(unique = true/* , length = 8 */)
+	private String senha;
+
 	@Email(message = "O campo email é inválido.")
 	@Column(unique = true)
 	private String email;
 
-	@NotBlank(message = "O campo nome não pode ser nulo.")
-	private String nome;
-
-	// @CPF(message = "O campo CPF é inválido.")
-	@NotBlank(message = "O campo CPF não pode ser nulo.")
-	@Column(unique = true, length = 16)
-	private String cpf;
-
 	public Usuario() {
-		super();
 	}
 
-	public Usuario(Integer id, @Email(message = "O campo email é inválido.") String email,
-			@NotBlank(message = "O campo nome não pode ser nulo.") String nome,
-			@NotBlank(message = "O campo CPF não pode ser nulo.") String cpf) {
+	public Usuario(@NotBlank(message = "O campo username não pode ser nulo.") String username,
+			@NotBlank(message = "O campo senha não pode ser nulo.") String senha,
+			@Email(message = "O campo email é inválido.") String email) {
 		super();
-		this.id = id;
+		this.username = username;
+		this.senha = senha;
 		this.email = email;
-		this.nome = nome;
-		this.cpf = cpf;
 	}
 
 	@Override
@@ -51,20 +51,28 @@ public class Usuario extends AbstractModel<Integer> {
 		this.id = id;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 }
