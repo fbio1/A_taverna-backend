@@ -4,9 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 @Entity(name = "fichaPersonagem")
 @Table
@@ -16,19 +17,17 @@ public class FichaPersonagem extends AbstractModel<Integer> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	private String nome;
-
 	private String historio;
 
 	private String tendencia;
 
-	@OneToOne
-	@JoinColumn(name = "invetario_id", nullable = false)
-	private Inventario inventario;
-
-	@OneToOne
-	@JoinColumn(name = "equipamentos_id", nullable = false)
-	private Equipamentos equipamentos;
+//	@OneToOne
+//	@JoinColumn(name = "invetario_id", nullable = false)
+//	private Inventario inventario;
+//
+//	@OneToOne
+//	@JoinColumn(name = "equipamentos_id", nullable = false)
+//	private Equipamentos equipamentos;
 
 	private String classe;
 
@@ -46,6 +45,10 @@ public class FichaPersonagem extends AbstractModel<Integer> {
 
 	private String estudos;
 
+	@OneToOne
+	@Cascade({ org.hibernate.annotations.CascadeType.ALL })
+	private Jogador jogador;
+
 	public FichaPersonagem() {
 	}
 
@@ -57,14 +60,6 @@ public class FichaPersonagem extends AbstractModel<Integer> {
 	@Override
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public String getHistorio() {
@@ -83,21 +78,21 @@ public class FichaPersonagem extends AbstractModel<Integer> {
 		this.tendencia = tendencia;
 	}
 
-	public Inventario getInventario() {
-		return inventario;
-	}
-
-	public void setInventario(Inventario inventario) {
-		this.inventario = inventario;
-	}
-
-	public Equipamentos getEquipamentos() {
-		return equipamentos;
-	}
-
-	public void setEquipamentos(Equipamentos equipamentos) {
-		this.equipamentos = equipamentos;
-	}
+//	public Inventario getInventario() {
+//		return inventario;
+//	}
+//
+//	public void setInventario(Inventario inventario) {
+//		this.inventario = inventario;
+//	}
+//
+//	public Equipamentos getEquipamentos() {
+//		return equipamentos;
+//	}
+//
+//	public void setEquipamentos(Equipamentos equipamentos) {
+//		this.equipamentos = equipamentos;
+//	}
 
 	public String getClasse() {
 		return classe;
@@ -161,6 +156,14 @@ public class FichaPersonagem extends AbstractModel<Integer> {
 
 	public void setEstudos(String estudos) {
 		this.estudos = estudos;
+	}
+
+	public Jogador getJogador() {
+		return jogador;
+	}
+
+	public void setJogador(Jogador jogador) {
+		this.jogador = jogador;
 	}
 
 }

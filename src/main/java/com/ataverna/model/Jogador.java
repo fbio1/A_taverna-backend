@@ -9,8 +9,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "jogador")
@@ -21,10 +19,14 @@ public class Jogador extends AbstractModel<Integer> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	private String nome;
+
 	@OneToOne
-	@Cascade({ org.hibernate.annotations.CascadeType.ALL })
-	private FichaPersonagem fichaPersonagem;
-	
+//	@JoinColumn(name = "usuario_id", nullable = false)
+	@JoinColumn(name = "usuario_id")
+	@JsonIgnore
+	private Usuario usuario;
+
 	@ManyToOne
 	@JoinColumn(name = "partidaRPG_id")
 	@JsonIgnore
@@ -43,12 +45,28 @@ public class Jogador extends AbstractModel<Integer> {
 		this.id = id;
 	}
 
-	public FichaPersonagem getFichaPersonagem() {
-		return fichaPersonagem;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setFichaPersonagem(FichaPersonagem fichaPersonagem) {
-		this.fichaPersonagem = fichaPersonagem;
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public PartidaRPG getPartidaRPG() {
+		return partidaRPG;
+	}
+
+	public void setPartidaRPG(PartidaRPG partidaRPG) {
+		this.partidaRPG = partidaRPG;
 	}
 
 }

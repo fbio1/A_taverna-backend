@@ -26,7 +26,7 @@ public class Mapa extends AbstractModel<Integer> {
 
 	private String eventos;
 
-	private String nocs; // EU NAO SEI O QUE SER ISSO
+//	private String nocs; // EU NAO SEI O QUE SER ISSO
 
 	private String lojas;
 
@@ -74,13 +74,13 @@ public class Mapa extends AbstractModel<Integer> {
 		this.eventos = eventos;
 	}
 
-	public String getNocs() {
-		return nocs;
-	}
-
-	public void setNocs(String nocs) {
-		this.nocs = nocs;
-	}
+//	public String getNocs() {
+//		return nocs;
+//	}
+//
+//	public void setNocs(String nocs) {
+//		this.nocs = nocs;
+//	}
 
 	public String getLojas() {
 		return lojas;

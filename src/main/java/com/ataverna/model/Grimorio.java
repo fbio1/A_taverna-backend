@@ -1,18 +1,14 @@
 package com.ataverna.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "grimorio")
 @Table
@@ -22,12 +18,22 @@ public class Grimorio extends AbstractModel<Integer> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@OneToMany(mappedBy = "grimorio", fetch = FetchType.EAGER, orphanRemoval = true)
-	@Fetch(FetchMode.SUBSELECT)
-	@Cascade({ org.hibernate.annotations.CascadeType.ALL })
-	private List<Magia> magias;
+//	@OneToMany(mappedBy = "grimorio", fetch = FetchType.EAGER, orphanRemoval = true)
+//	@Fetch(FetchMode.SUBSELECT)
+//	@Cascade({ org.hibernate.annotations.CascadeType.ALL })
+//	private List<Magia> magias;
+
+	private String nome;
+
+	private String descricao;
+
+	@ManyToOne
+	@JoinColumn(name = "partidaRPG_id")
+	@JsonIgnore
+	private PartidaRPG partidaRPG;
 
 	public Grimorio() {
+//		magias = new ArrayList<>();
 	}
 
 	@Override
@@ -40,12 +46,46 @@ public class Grimorio extends AbstractModel<Integer> {
 		this.id = id;
 	}
 
-	public List<Magia> getMagias() {
-		return magias;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setMagias(List<Magia> magias) {
-		this.magias = magias;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public PartidaRPG getPartidaRPG() {
+		return partidaRPG;
+	}
+
+	public void setPartidaRPG(PartidaRPG partidaRPG) {
+		this.partidaRPG = partidaRPG;
+	}
+
+//	public List<Magia> getMagias() {
+//		return magias;
+//	}
+//
+//	public void setMagias(List<Magia> magias) {
+//		this.magias = magias;
+//	}
+//	
+//	public void add(Magia magia) {
+//		magias.add(magia);
+//		magia.setGrimorio(this);
+//	}
+//
+//	public void removeAnalise(Magia magia) {
+//		magias.remove(magia);
+//		magia.setGrimorio(null);
+//	}
 
 }

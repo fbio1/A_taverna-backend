@@ -4,7 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "historia")
 @Table
@@ -19,6 +23,11 @@ public class Historia extends AbstractModel<Integer> {
 	private String titulo;
 
 	private String descricao;
+
+	@OneToOne
+	@JoinColumn(name = "partidaRPG_id")
+	@JsonIgnore
+	private PartidaRPG partidaRPG;
 
 	public Historia() {
 	}
@@ -55,6 +64,14 @@ public class Historia extends AbstractModel<Integer> {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public PartidaRPG getPartidaRPG() {
+		return partidaRPG;
+	}
+
+	public void setPartidaRPG(PartidaRPG partidaRPG) {
+		this.partidaRPG = partidaRPG;
 	}
 
 }

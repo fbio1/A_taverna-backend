@@ -23,6 +23,12 @@ public class Item extends AbstractModel<Integer> {
 	@JsonIgnore
 	private Enciclopedia enciclopedia;
 
+	private String nome;
+	private String descricao;
+	private String atributo;
+	private String efeito;
+	private double preco;
+
 	public Item() {
 	}
 
@@ -42,6 +48,46 @@ public class Item extends AbstractModel<Integer> {
 
 	public void setEnciclopedia(Enciclopedia enciclopedia) {
 		this.enciclopedia = enciclopedia;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getAtributo() {
+		return atributo;
+	}
+
+	public void setAtributo(String atributo) {
+		this.atributo = atributo;
+	}
+
+	public String getEfeito() {
+		return efeito;
+	}
+
+	public void setEfeito(String efeito) {
+		this.efeito = efeito;
+	}
+
+	public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(double preco) {
+		this.preco = preco;
 	}
 
 }

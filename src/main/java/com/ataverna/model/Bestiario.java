@@ -1,18 +1,14 @@
 package com.ataverna.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "bestiario")
 @Table
@@ -22,12 +18,22 @@ public class Bestiario extends AbstractModel<Integer> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@OneToMany(mappedBy = "bestiario", fetch = FetchType.EAGER, orphanRemoval = true)
-	@Fetch(FetchMode.SUBSELECT)
-	@Cascade({ org.hibernate.annotations.CascadeType.ALL })
-	private List<Criatura> criaturas;
+	private String nome;
+
+	private String descricao;
+
+	@ManyToOne
+	@JoinColumn(name = "partidaRPG_id")
+	@JsonIgnore
+	private PartidaRPG partidaRPG;
+
+//	@OneToMany(mappedBy = "bestiario", fetch = FetchType.EAGER, orphanRemoval = true)
+//	@Fetch(FetchMode.SUBSELECT)
+//	@Cascade({ org.hibernate.annotations.CascadeType.ALL })
+//	private List<Criatura> criaturas;
 
 	public Bestiario() {
+//		criaturas = new ArrayList<>();
 	}
 
 	@Override
@@ -40,22 +46,46 @@ public class Bestiario extends AbstractModel<Integer> {
 		this.id = id;
 	}
 
-	public List<Criatura> getCriaturas() {
-		return criaturas;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setCriaturas(List<Criatura> criaturas) {
-		this.criaturas = criaturas;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	/*public void addAnalise(Analise novaAnalise) {
-		listaAnalise.add(novaAnalise);
-		novaAnalise.setSolicitacao(this);
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void removeAnalise(Analise removeAnalise) {
-		listaAnalise.remove(removeAnalise);
-		removeAnalise.setSolicitacao(null);
-	}*/
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public PartidaRPG getPartidaRPG() {
+		return partidaRPG;
+	}
+
+	public void setPartidaRPG(PartidaRPG partidaRPG) {
+		this.partidaRPG = partidaRPG;
+	}
+
+//	public List<Criatura> getCriaturas() {
+//		return criaturas;
+//	}
+//
+//	public void setCriaturas(List<Criatura> criaturas) {
+//		this.criaturas = criaturas;
+//	}
+//
+//	public void add(Criatura criatura) {
+//		criaturas.add(criatura);
+//		criatura.setBestiario(this);
+//	}
+//
+//	public void removeAnalise(Criatura criatura) {
+//		criaturas.remove(criatura);
+//		criatura.setBestiario(null);
+//	}
 
 }
